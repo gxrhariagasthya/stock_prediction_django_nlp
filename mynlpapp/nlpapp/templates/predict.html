@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Price Prediction</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins";
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://media.istockphoto.com/id/1425905549/photo/digitally-generated-currency-and-exchange-stock-chart-for-finance-and-economy-based-computer.jpg?s=1024x1024&w=is&k=20&c=V3PeqxnFQOV20ARyLtDHpOfN_YpgDtyVFSP5kiJBst8=') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .container span {
+      position: absolute;
+      left: 0;
+      width: 32px;
+      height: 6px;
+      background: #2c4766;
+      border-radius: 8px;
+      transform-origin: 128px;
+      transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+      animation: animateBlink 3s linear infinite;
+      animation-delay: calc(var(--i) * (3s / 50));
+      z-index: 0;
+    }
+
+    @keyframes animateBlink {
+      0% {
+        background: #0ef;
+      }
+      25% {
+        background: #2c4766;
+      }
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #0ef;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 100px;
+      background: transparent;
+      border: 2px solid #2c4766;
+      outline: none;
+      border-radius: 40px;
+      font-size: 1em;
+      color: #fff;
+      padding: 0 20px;
+      transition: 0.5s;
+    }
+
+    .input-box input:focus,
+    .input-box input:valid {
+      border-color: #0ef;
+    }
+
+    .input-box label {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      font-size: 1em;
+      color: #fff;
+      pointer-events: none;
+      transition: 0.5s ease;
+    }
+
+    .input-box input:focus ~ label,
+    .input-box input:valid ~ label {
+      top: 1px;
+      font-size: 0.8em;
+      background-color: #1f293a;
+      padding: 0 6px;
+      color: #0ef;
+    }
+
+    .btn {
+      width: 100%;
+      height: 45px;
+      border-radius: 45px;
+      background: #0ef;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1em;
+      color: #1f293a;
+      font-weight: 600;
+    }
+
+    .result {
+      color: #0ef;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .result p {
+      font-size: 1.2em;
+    }
+
+    .login-box {
+      position: relative;
+      z-index: 1; 
+      background: rgba(0, 0, 0, 0.7); 
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h2>STOCK PRICE PREDICTION</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="input-box">
+          <input type="textarea" name="input_text" placeholder="Enter your text here" required>
+          <label>Enter news headlines</label>
+        </div>
+        <button type="submit" class="btn">Predict...</button>
+
+        {% if result %}
+        <div class="result">
+          <h1>Prediction Result</h1>
+          <p>{{ result }}</p>
+          <form method="GET">
+            <button type="submit" class="btn">Make another prediction...</button>
+          </form>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+
+    <script>
+      const container = document.querySelector('.container');
+      for (let i = 0; i < 50; i++) {
+        const span = document.createElement('span');
+        span.style.setProperty('--i', i);
+        container.appendChild(span);
+      }
+    </script>
+  </div>
+</body>
+</html>

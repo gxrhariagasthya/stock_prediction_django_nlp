@@ -1,6 +1,0 @@
-Django>=4.0,<5.0
-pandas>=1.5.0
-scikit-learn>=1.2.0
-joblib>=1.2.0
-numpy>=1.24.0
-tensorflow>=2.12.0  # or torch>=2.0.0 if using PyTorch

@@ -1,0 +1,29 @@
+# Python bytecode
+*.py[cod]
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+stockenv/
+
+# Django stuff:
+*.sqlite3
+/static/
+/media/
+*.pkl
+*.csv
+
+# Environment variables
+.env
+
+# Logs
+*.log
+*.out
+*.err
+
+# Miscellaneous
+*.swp
+.DS_Store
+.idea/
+.vscode/

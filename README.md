@@ -1,1 +1,0 @@
-# stock_prediction_django_nlp
